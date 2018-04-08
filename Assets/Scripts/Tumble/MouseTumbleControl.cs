@@ -9,7 +9,7 @@ public class MouseTumbleControl : MonoBehaviour {
 	[SerializeField] TumbleBox character;
 
 	Plane p;
-
+	bool nudgedLastFrame = false;
 
 	void Awake () {
 		p = new Plane(Vector3.forward, PlayPlane.playPlaneOffset);
@@ -17,8 +17,13 @@ public class MouseTumbleControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton(0)){
+		if (Input.GetAxis("Fire1") > 0){
 			TryMoveCharacter();
+		}
+		if (Input.GetAxis("Fire2") > 0 && !nudgedLastFrame){
+			TryNudgeCharacter();
+		} else if (Input.GetAxis("Fire2") < Mathf.Epsilon){
+			nudgedLastFrame = false;
 		}
 	}
 
@@ -34,11 +39,24 @@ public class MouseTumbleControl : MonoBehaviour {
 		return false;
 	}
 
+	// if the mouse's planar position is not null, sends the point to the movement method of the TumbleBox
 	void TryMoveCharacter(){
 		Vector3 dir;
 		if (MousePlanePosition(out dir)){
 			dir -= character.transform.position;
 			character.AddTorqueTowards(dir);
+		}
+	}
+
+	void TryNudgeCharacter(){
+		NudgeAssist assist = character.GetAssistant();
+		if (assist == null)
+			return;
+		Vector3 dir;
+		if(MousePlanePosition(out dir)){
+			dir -= character.transform.position;
+			assist.AddAssistForce(dir, true);
+			nudgedLastFrame = true;
 		}
 	}
 

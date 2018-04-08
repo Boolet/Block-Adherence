@@ -11,10 +11,12 @@ public class TumbleBox : MonoBehaviour {
 	[SerializeField] bool obtuseAngleMaximized = false;
 
 	Rigidbody body;
+	NudgeAssist assistant;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
+		assistant = GetComponent<NudgeAssist>();
 	}
 
 	/// <summary>
@@ -44,5 +46,9 @@ public class TumbleBox : MonoBehaviour {
 	public void AddTorqueTowards(float direction){
 		direction = Mathf.Clamp(direction, -1, 1);
 		body.AddTorque(Vector3.forward * Mathf.Min(angleFactor, maxTorque) * direction, ForceMode.Impulse);
+	}
+
+	public NudgeAssist GetAssistant(){
+		return assistant;
 	}
 }

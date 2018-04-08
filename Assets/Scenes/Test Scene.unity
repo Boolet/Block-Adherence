@@ -800,7 +800,7 @@ MonoBehaviour:
   yFollow: 1
   zFollow: 0
   slowFollow: 1
-  minSlowFollowSpeed: 1
+  minSlowFollowSpeed: 0.5
   offsetFactor: 1
 --- !u!114 &687700773
 MonoBehaviour:
@@ -1312,6 +1312,11 @@ Prefab:
     - target: {fileID: 4127028087797388, guid: 1512f3d21f7a14005898a6baa8ee7d6c, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483135499257276, guid: 1512f3d21f7a14005898a6baa8ee7d6c,
+        type: 2}
+      propertyPath: assistForceMagnitude
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1512f3d21f7a14005898a6baa8ee7d6c, type: 2}

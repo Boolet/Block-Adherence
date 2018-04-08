@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 54974561866332624}
   - component: {fileID: 114878950103881044}
   - component: {fileID: 114060040757672804}
+  - component: {fileID: 114483135499257276}
   m_Layer: 0
   m_Name: Tumble Box
   m_TagString: Untagged
@@ -125,6 +126,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77e12fc067af4b08ba2bd98c8c95981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114483135499257276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940592922712334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6226fe05d0064545be11b684a8e5f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assistForceMagnitude: 1
+  forceMode: 1
 --- !u!114 &114806774696966412
 MonoBehaviour:
   m_ObjectHideFlags: 1
