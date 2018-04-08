@@ -8,7 +8,6 @@ public class TumbleBox : MonoBehaviour {
 
 	[SerializeField] float angleFactor = 30f;	//an impulse force proportional to the angle offset; at full value at 90 degrees
 	[SerializeField] float maxTorque = 30f;		//the maximum allowed impulse force. Values higher than the angle factor do nothing
-	[SerializeField] float assistForce = 0f;	//a constant force to help the cube stick to walls and stuff
 	[SerializeField] bool obtuseAngleMaximized = false;
 
 	Rigidbody body;
@@ -45,10 +44,5 @@ public class TumbleBox : MonoBehaviour {
 	public void AddTorqueTowards(float direction){
 		direction = Mathf.Clamp(direction, -1, 1);
 		body.AddTorque(Vector3.forward * Mathf.Min(angleFactor, maxTorque) * direction, ForceMode.Impulse);
-	}
-
-	//adds force in the direction of motion; UNFINISHED
-	void AddAssistForce(Vector3 target){
-		body.AddForce(target.normalized * assistForce * Time.deltaTime, ForceMode.Force);
 	}
 }
