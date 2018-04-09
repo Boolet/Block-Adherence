@@ -48,6 +48,7 @@ public class MouseTumbleControl : MonoBehaviour {
 		}
 	}
 
+	// if th mouse's planar position is not null and there is a nudge assistant, sends the point to the NudgeAssist
 	void TryNudgeCharacter(){
 		NudgeAssist assist = character.GetAssistant();
 		if (assist == null)

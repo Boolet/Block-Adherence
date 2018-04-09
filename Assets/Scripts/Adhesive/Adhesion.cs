@@ -7,6 +7,7 @@ public class Adhesion : MonoBehaviour {
 	[SerializeField] bool indestructibleJoints = true;
 	[SerializeField] float jointStrength = 5f;
 	[SerializeField] float minimalContactArea = 0.2f;
+	[SerializeField] ParticleSystem visualEffect;
 
 	bool adhesionOn = false;
 	Dictionary<Adherent, Joint> attachedObjects = new Dictionary<Adherent, Joint>();
@@ -25,6 +26,8 @@ public class Adhesion : MonoBehaviour {
 		}
 		if (body.IsSleeping())
 			body.WakeUp();
+		//visualEffect.emission.enabled = adhesionOn; 
+		visualEffect.gameObject.SetActive(adhesionOn);
 	}
 
 	//sets the adhesion system to active or inactive
@@ -49,8 +52,10 @@ public class Adhesion : MonoBehaviour {
 	void Adhere(Adherent other){
 		FixedJoint joint = gameObject.AddComponent<FixedJoint>();
 		joint.connectedBody = other.GetBody();
-		if(!indestructibleJoints)
+		if (!indestructibleJoints){
 			joint.breakForce = jointStrength;
+			joint.breakTorque = jointStrength;
+		}
 		attachedObjects.Add(other, joint);
 		print("Adhering to " + other);
 	}
