@@ -972,7 +972,7 @@ MonoBehaviour:
   zFollow: 0
   slowFollow: 1
   minSlowFollowSpeed: 0.5
-  offsetFactor: 1
+  offsetFactor: 2
 --- !u!114 &687700773
 MonoBehaviour:
   m_ObjectHideFlags: 0
