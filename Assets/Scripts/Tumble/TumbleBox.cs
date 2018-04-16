@@ -7,16 +7,18 @@ using UnityEngine;
 public class TumbleBox : MonoBehaviour {
 
 	[SerializeField] float angleFactor = 30f;	//an impulse force proportional to the angle offset; at full value at 90 degrees
-	[SerializeField] float maxTorque = 30f;		//the maximum allowed impulse force. Values higher than the angle factor do nothing
+	public float maxTorque = 30f;		//the maximum allowed impulse force. Values higher than the angle factor do nothing
 	[SerializeField] bool obtuseAngleMaximized = false;
 
 	Rigidbody body;
 	NudgeAssist assistant;
+	TumbleArcVisual visual;
 
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody>();
 		assistant = GetComponent<NudgeAssist>();
+		visual = GetComponent<TumbleArcVisual>();
 	}
 
 	/// <summary>
@@ -34,7 +36,11 @@ public class TumbleBox : MonoBehaviour {
 		if(obtuseAngleMaximized)
 			baseMagnitude = angleOffset > 90 ? 1 : crossed.magnitude;		//so that we can account for obtuse angles
 		
-		float torqueMagnitude = Mathf.Min(baseMagnitude * angleFactor, maxTorque) * Time.deltaTime;
+		float torqueMagnitude = Mathf.Min(baseMagnitude * angleFactor, maxTorque) * Time.fixedDeltaTime;
+
+		if (visual != null){
+			visual.ShowTumbleArc(upPlane, targetPlane, torqueMagnitude);
+		}
 
 		body.AddTorque(crossed.normalized * torqueMagnitude, ForceMode.Impulse);
 	}

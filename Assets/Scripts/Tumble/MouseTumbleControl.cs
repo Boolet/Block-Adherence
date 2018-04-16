@@ -17,13 +17,16 @@ public class MouseTumbleControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetAxis("Fire1") > 0){
-			TryMoveCharacter();
-		}
 		if (Input.GetAxis("Fire2") > 0 && !nudgedLastFrame){
 			TryNudgeCharacter();
 		} else if (Input.GetAxis("Fire2") < Mathf.Epsilon){
 			nudgedLastFrame = false;
+		}
+	}
+
+	void FixedUpdate(){
+		if (Input.GetAxis("Fire1") > 0){
+			TryMoveCharacter();
 		}
 	}
 
