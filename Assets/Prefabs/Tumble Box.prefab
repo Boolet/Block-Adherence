@@ -269,6 +269,7 @@ MonoBehaviour:
   arc: {fileID: 120414921782095248, guid: fbc78f1a0ae7940448b8dc70f1162306, type: 2}
   fadeTime: 1
   arcSegments: 100
+  indicatorLength: 4
 --- !u!114 &114629504052622662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angleFactor: 30
   maxTorque: 20
-  obtuseAngleMaximized: 0
+  obtuseAngleMaximized: 1
 --- !u!114 &114878950103881044
 MonoBehaviour:
   m_ObjectHideFlags: 1
