@@ -12,6 +12,8 @@ public class TumbleArcVisual : MonoBehaviour {
 	[SerializeField] float fadeTime = 1f;
 	[SerializeField] int arcSegments = 100;
 	[SerializeField] float indicatorLength = 4f;
+	[SerializeField] Color lowTorqueColor;
+	[SerializeField] Color highTorqueColor;
 
 	TumbleBox box;
 	float transparencyTimer = 1f;
@@ -43,8 +45,10 @@ public class TumbleArcVisual : MonoBehaviour {
 		up.SetPositions(new Vector3[]{transform.position, boxUp.normalized * indicatorLength + transform.position});
 		cursor.SetPositions(new Vector3[]{transform.position, cursorPosition.normalized * indicatorLength + transform.position});
 
+		float powerPortion = torqueMagnitude / (box.maxTorque * Time.fixedDeltaTime);
+
 		Vector3[] newArc = new Vector3[arcSegments];
-		Vector3 arcStart = Vector3.Lerp(Vector3.zero, boxUp.normalized * indicatorLength, torqueMagnitude / (box.maxTorque * Time.fixedDeltaTime));
+		Vector3 arcStart = Vector3.Lerp(Vector3.zero, boxUp.normalized * indicatorLength, powerPortion);
 		for (int i = 0; i < arcSegments; ++i){
 			newArc[i] = transform.position + Vector3.RotateTowards(arcStart,
 				cursorPosition,
@@ -52,6 +56,14 @@ public class TumbleArcVisual : MonoBehaviour {
 				0);
 		}
 		arc.SetPositions(newArc);
+
+		SetColors(powerPortion);
+	}
+
+	void SetColors(float colorLerpValue){
+		colorLerpValue = Mathf.Clamp(colorLerpValue, 0, 1);
+		Color targetColor = lowTorqueColor * (1-colorLerpValue) + highTorqueColor * colorLerpValue;
+		up.startColor = up.endColor = cursor.startColor = cursor.endColor = arc.startColor = arc.endColor = targetColor;
 	}
 
 	void Fade(){

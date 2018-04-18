@@ -270,6 +270,8 @@ MonoBehaviour:
   fadeTime: 1
   arcSegments: 100
   indicatorLength: 4
+  lowTorqueColor: {r: 0.066937, g: 0, b: 0.88235295, a: 0}
+  highTorqueColor: {r: 0.875, g: 0, b: 0, a: 0}
 --- !u!114 &114629504052622662
 MonoBehaviour:
   m_ObjectHideFlags: 1
